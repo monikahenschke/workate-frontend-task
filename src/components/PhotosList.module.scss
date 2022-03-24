@@ -1,0 +1,51 @@
+.PhotosList__list {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    cursor: pointer;
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    background-color: rgba(255,255,255,0.7);
+    & svg {
+        width: 30px;
+        height: 30px;
+    }
+
+}
+
+.button:disabled,
+.button[disabled]{
+    cursor: not-allowed;
+    pointer-events: all !important;
+
+    & svg path {
+        fill: #f1f1f1;
+    }
+}
+
+.buttonPrev 
+{
+    left: 0;
+  
+}
+
+.buttonNext {
+    right: 0;
+}
+.isLoadingState {
+    text-align: center;
+}
