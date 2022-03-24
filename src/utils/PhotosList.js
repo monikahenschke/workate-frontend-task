@@ -13,6 +13,8 @@ function getSlugFromPhotosUrlsList(photosList) {
     const unsplashDomainFromUrl = splittedUrl[1];
     if (unsplashDomainFromUrl === unsplashDomain) {
       return splittedUrl[3];
+    } else {
+      return undefined;
     }
   });
   return slugUrls.filter((slug) => slug);
