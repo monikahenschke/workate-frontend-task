@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useCallback } from 'react';
 import { createPhotosListFromUnsplash } from '../utils/PhotosList';
 
 export const PhotosContext = createContext();
@@ -32,11 +32,7 @@ export const PhotosContextProvider = ({ children }) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    setPhotosUrlsForActivePage();
-  }, [photosListState, activePageState]);
-
-  function setPhotosUrlsForActivePage() {
+  const setPhotosUrlsForActivePage = useCallback(() => {
     const numberOfFirstPhotoOnPage = activePageState * numberOfPhotosToShow;
     const numberOfLastPhotoOnPage =
       numberOfFirstPhotoOnPage + numberOfPhotosToShow;
@@ -46,7 +42,11 @@ export const PhotosContextProvider = ({ children }) => {
       numberOfLastPhotoOnPage
     );
     setUrlsOfPhotosCurrentlyShown(urls);
-  }
+  }, [activePageState, photosListState]);
+
+  useEffect(() => {
+    setPhotosUrlsForActivePage();
+  }, [setPhotosUrlsForActivePage]);
 
   function calculateNumberOfPages(photosList) {
     if (photosList.length > 0) {
